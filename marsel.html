@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Wishes</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(-45deg, #ffecd2, #fcb69f, #ff9a9e, #fad0c4);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      font-family: 'Quicksand', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 5px solid white;
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .card {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 90%;
+      width: 400px;
+      opacity: 0;
+      transform: scale(0.8) rotateX(-90deg);
+      transition: transform 0.6s ease, opacity 0.6s ease;
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: scale(1) rotateX(0);
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff4081;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .btn-next {
+      margin-top: 2rem;
+      padding: 0.7rem 1.5rem;
+      background-color: #ff4081;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-next:hover {
+      background-color: #e73370;
+    }
+
+    .balloon {
+      position: absolute;
+      width: 30px;
+      height: 40px;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      background-color: red;
+      animation: float 10s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        bottom: -50px;
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        bottom: 110%;
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Balloons -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.left = Math.random() * 100 + '%';
+      balloon.style.animationDuration = (6 + Math.random() * 5) + 's';
+      balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 70%)`;
+      document.body.appendChild(balloon);
+    }
+  </script>
+
+  <!-- Profile Photo -->
+  <img src="marsel.png" alt="Foto Ulang Tahun" class="photo" />
+
+  <!-- Card -->
+  <div class="card" id="card">
+    <h1>Selamat Ulang Tahun 🎉</h1>
+    <p>Semoga harimu penuh warna!</p>
+    <button class="btn-next" id="nextBtn">Lanjut</button>
+  </div>
+
+  <script>
+    document.getElementById("link-thr")?.addEventListener("click", function(e) {
+  e.preventDefault();
+  window.open("https://link.dana.id/danakaget?c=swtv74dnx&r=bzTBWn&orderId=20250330101214025915010300166691015169370", "_blank");
+});
+    const wishes = [
+      {
+        title: "Selamat Ulang Tahun Marsel🎉",
+        text: "."
+      },
+      {
+  title: "Doa buat lu 💖",
+  text: "Semoga selalu diberi kemudahan, rezeki, dan karirnya berkembang pesat dan penuh keberkahan."
+},
+      {
+        title: "Tetap Semangat! 🔥",
+        text: "Jangan dengerin kata orang lain, jadilah diri sendiri."
+      },
+      {
+        title: "Cita-cita ✨",
+        text: "Semoga jadi programmer hebat yang menginspirasi!"
+      },
+      {
+  title: "Penutup 🎁",
+  text: `Ada THR dari gua, mohon maaf lahir batin: <br><a href="#thr" id="link-thr">Klik aja sel 🎁</a>`
+}
+
+
+    ];
+
+    const card = document.getElementById('card');
+    const btn = document.getElementById('nextBtn');
+    let index = 0;
+
+    function showCard(data) {
+  card.classList.remove('show');
+  setTimeout(() => {
+    card.querySelector('h1').textContent = data.title;
+    card.querySelector('p').innerHTML = data.text;
+
+    // Pasang event listener kalau ada link DANA di dalam
+    const linkThr = document.getElementById("link-thr");
+    if (linkThr) {
+      linkThr.addEventListener("click", function(e) {
+        e.preventDefault();
+        window.open("https://link.dana.id/danakaget?c=swtv74dnx&r=bzTBWn&orderId=20250330101214025915010300166691015169370", "_blank");
+      });
+    }
+
+    card.classList.add('show');
+  }, 300);
+}
+
+
+    btn.addEventListener('click', () => {
+      index++;
+      if (index < wishes.length) {
+        showCard(wishes[index]);
+        if (index === wishes.length - 1) btn.textContent = "Selesai";
+      } else {
+        btn.style.display = 'none';
+      }
+    });
+
+    window.onload = () => {
+      showCard(wishes[0]);
+    };
+  </script>
+</body>
+</html>
